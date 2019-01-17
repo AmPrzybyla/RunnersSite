@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Start>
+@{
+    ViewData["Title"] = "StartDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>StartDetails</h2>
+
+@foreach (var start in Model)
+{
+    <h2>@start.User.UserName</h2>
+    <h3>@start.Price</h3>
+}

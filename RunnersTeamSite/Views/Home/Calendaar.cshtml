@@ -1,0 +1,142 @@
+﻿@*@{
+        ViewData["Title"] = "Calendar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Calendar</h2>
+
+    <div id="calender"></div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel='stylesheet' />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel='stylesheet' media='print' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+    <script src='~/lib/jquery/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+
+    @section scripts{
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                var events = [];
+                $.ajax({
+                    type: "GET",
+                    url: "/home/Calendar",
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            events.push({
+                                title: v.Subject,
+                                description: v.Description,
+                                start: moment(v.Start),
+                                end: v.End != null ? moment(v.End) : null,
+                                color: v.ThemeColour,
+                                allDay: v.IsFullDay
+                            });
+                        })
+
+                        GenerateCalender(events);
+                    },
+                    error: function (error) {
+                        alert('filed');
+                    }
+                })
+
+                function GenerateCalender(events) {
+                    $('#calender').fullCalendar('destroy');
+                    $('#calender').fullCalendar({
+                        contentHeight: 400,
+                        defaultDate: new Date(),
+                        timeFormat: 'h(:mm)a',
+                        header: {
+                            left: 'prev, next today',
+                            center: 'title',
+                            right: 'month, basicWeek, basicDay, agenda'
+                        },
+                        eventLimit: true,
+                        eventColor: '#378006',
+                        events: events
+                    })
+                }
+            })
+        </script>
+    }*@
+
+
+
+
+
+
+    <div class="container" >
+        <div class="row">
+            
+            <div class="col-md-9">
+                <h2>Calendar</h2>
+            </div>
+            <div id='calender'></div>
+        </div>
+    </div>
+    
+
+
+@section scripts
+{
+<script>
+
+    $(document).ready(function () {
+
+        var events = [];
+        $.ajax({
+            type: "GET",
+            url: "/api/home",
+            success: function (data) {
+                $.each(data, function (i, v) {
+                    events.push({
+                        imageurl: '/images/tree_mountain-512.png',
+                        //title: v.subject,
+                        //description: v.description,
+                        start: moment(v.start),
+                        //end: v.End != null ? moment(v.End) : null,
+                        url:'/competition/details/'+v.id,
+                    });
+                })
+
+                GenerateCalender(events);
+            },
+            error: function (error) {
+                alert('filed');
+            }
+        })
+
+
+        function GenerateCalender(events) {
+            $('#calender').fullCalendar('destroy');
+            $('#calender').fullCalendar({
+                height: 1000,
+                    defaultDate: new Date(),
+                header: {
+                    left: 'prev, next today',
+                    center: 'title',
+                    right: 'month, basicWeek, basicDay'
+                },
+                eventLimit: true,
+                eventColor: '#378006',
+                eventRender: function (event, eventElement) {
+                    if (event.imageurl) {
+                        eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl + "' width='12' height='12'>");
+                    }
+                },
+                events: events,
+                eventClick: function (event) {
+                    if (event.url)
+                        window.open(event.url, "_self");
+                    return false;
+                }
+            })
+        }
+    })
+
+</script>
+    }

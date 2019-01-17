@@ -1,0 +1,40 @@
+﻿@model StartViewModel
+@{
+    ViewData["Title"] = "AddStart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddStart</h2>
+
+@ViewBag.Name
+
+@Model.Competition.Name
+
+
+<form asp-controller="Starts" asp-action="SaveStart" method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+        <label asp-for="Competition.Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Competition.Name" class="form-control" />
+            <span asp-validation-for="Competition.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <input type="hidden" asp-for="CompetitionId" class="form-control" />
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Create pie" />
+        </div>
+    </div>
+</form>

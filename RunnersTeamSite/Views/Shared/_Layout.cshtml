@@ -1,0 +1,74 @@
+﻿@using System.Security.Claims
+@using System.Threading.Tasks
+@using RunnersTeamSite.Auth
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
+
+        <!DOCTYPE html>
+
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width" />
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+            <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+            <link href="~/Content/site.css" rel="stylesheet" />
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
+            <meta charset='utf-8' />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel='stylesheet' />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel='stylesheet' media='print' />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+            <script src='~/lib/jquery/jquery.min.js'></script>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+
+
+
+            <title>Bethany's Pe Shop</title>
+        </head>
+        <body>
+
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Account" asp-action="Login">Log in</a></li>
+                            @*    <li><a asp-controller="Account" asp-action="Logout">Log out</a></li>*@
+
+                        </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm"
+                                  method="post" class="navbar-right">
+                                >
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                    <li><a asp-action="AllStarts" asp-controller="User" asp-route-userId="@SignInManager.UserManager.GetUserId(User)">Starts</a></li>
+                                </ul>
+                            </form>
+
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="login" asp-action="Login" asp-controller="Account">LogIn</a></li>
+                            </ul>
+
+                        }
+                    </div>
+                </div>
+            </nav>
+            @RenderBody()
+
+
+            @RenderSection("scripts", required: false)
+        </body>
+    </html>

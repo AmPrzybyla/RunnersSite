@@ -1,0 +1,37 @@
+﻿@model RunnersTeamSite.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using RunnersTeamSite.Auth
+@using System.Security.Claims
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
+<h2>Index</h2>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h2>@User.Identity.Name</h2>
+}
+else
+{
+    <h2>nie</h2>
+}
+
+@Model.Title
+
+@foreach (var competition in Model.Competitions)
+{
+    <h3>
+        <a asp-controller="Competition" asp-action="Details" asp-route-id="@competition.Id">@competition.Name</a>
+    </h3>
+    <h2>@competition.Distance km</h2>
+
+
+}

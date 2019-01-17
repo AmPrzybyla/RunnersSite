@@ -1,0 +1,11 @@
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\bin\Debug\netcoreapp2.0\RunnersTeamSite.deps.json
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\bin\Debug\netcoreapp2.0\RunnersTeamSite.runtimeconfig.json
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\bin\Debug\netcoreapp2.0\RunnersTeamSite.runtimeconfig.dev.json
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\bin\Debug\netcoreapp2.0\RunnersTeamSite.dll
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.csproj.CoreCompileInputs.cache
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.AssemblyInfoInputs.cache
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.AssemblyInfo.cs
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\bin\Debug\netcoreapp2.0\RunnersTeamSite.pdb
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.dll
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.pdb
+C:\Users\klaptop\source\repos\RunnersTeamSite\RunnersTeamSite\obj\Debug\netcoreapp2.0\RunnersTeamSite.csprojAssemblyReference.cache

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Start>
+@{
+    ViewData["Title"] = "AllStarts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllStarts</h2>
+
+@foreach (var start in Model)
+{
+    <h3>@start.Competition.Name</h3>
+    <h3>@start.Competition.Date.ToShortDateString().ToString()</h3>
+    <h3>@start.Competition.Distance</h3>
+    <h3>@start.Price</h3>
+}
