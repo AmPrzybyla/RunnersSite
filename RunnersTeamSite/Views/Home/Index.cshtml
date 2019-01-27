@@ -1,37 +1,64 @@
-﻿@model RunnersTeamSite.ViewModels.HomeViewModel
+﻿@*@model RunnersTeamSite.ViewModels.NewsListViewModel
 @{
     ViewData["Title"] = "Index";
-}
-@using RunnersTeamSite.Auth
-@using System.Security.Claims
-@using System.Threading.Tasks
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Identity
-@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+}*@
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject IAuthorizationService AuthorizationService
-@inject UserManager<ApplicationUser> UserManager
 <h2>Index</h2>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <h2>@User.Identity.Name</h2>
-}
-else
-{
-    <h2>nie</h2>
-}
 
-@Model.Title
+<div id="newsDiv"></div>
 
-@foreach (var competition in Model.Competitions)
-{
-    <h3>
-        <a asp-controller="Competition" asp-action="Details" asp-route-id="@competition.Id">@competition.Name</a>
-    </h3>
-    <h2>@competition.Distance km</h2>
 
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            LoadMoreNews();
+        });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                LoadMorePies();
+            }
+        });
+
+        function LoadMoreNews() {
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/News',
+                dataType: 'json',
+                success: function (jsonData) {
+                    if (jsonData == null) {
+                        alert('no data returned');
+                        return;
+                    }
+
+                    $.each(jsonData, function (index, news) {
+
+                        var NewsSummarString = '<div class="col-sm-8 col-lg-8 col-md-8"> ' +
+                                              '  <div class="thumbnail">' +
+                                              '     <img src="' + news.ImageUrl + '" alt="">' +
+                            '      <div class="caption">' +
+                            '         <h3 class="pull-right">' + news.title + '</h3>' +
+                            '         <h3>' +
+                            '             <a href=/News/News/' + news.id + '>' + news.title + '</a>' +
+                            '         </h3>' +
+                            '         <p>' + news.text + '</p>' +
+                                              '    </div>' +
+                                              '  </div>' +
+                                              '</div>';
+
+                        $('#newsDiv').append(NewsSummarString);
+                    });
+                },
+                error: function (ex) {
+                    alert(ex);
+                }
+            });
+            return false;
+        }
+    </script>
 
 }

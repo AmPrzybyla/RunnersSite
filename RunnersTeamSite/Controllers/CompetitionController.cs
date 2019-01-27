@@ -27,6 +27,11 @@ namespace RunnersTeamSite.Controllers
             return View();
         }
 
+        public IActionResult Calendar()
+        {
+            return View();
+        }
+
         public IActionResult AddCompetition()
         {
             return View();

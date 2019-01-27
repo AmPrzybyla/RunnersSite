@@ -13,18 +13,21 @@ namespace RunnersTeamSite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _context;
+      //  private readonly AppDbContext _context;
         private readonly ICompetitionRepository _competitionRepository;
+        private readonly INewsRepository _newsRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public JsonSerializerSettings JsonRequestBehavior { get; private set; }
-
-        public HomeController(AppDbContext context, ICompetitionRepository competitionRepository, UserManager<ApplicationUser> userManager)
+        public HomeController(ICompetitionRepository competitionRepository, INewsRepository newsRepository, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _competitionRepository = competitionRepository;
+            _newsRepository = newsRepository;
             _userManager = userManager;
         }
+
+        //     public JsonSerializerSettings JsonRequestBehavior { get; private set; }
+
+
 
         //public HomeController(ICompetitionRepository competitionRepository, UserManager<ApplicationUser> userManager)
         //{
@@ -32,16 +35,23 @@ namespace RunnersTeamSite.Controllers
         //    _userManager = userManager;
         //}
 
+        //public IActionResult Index()
+        //{
+        //    var competitions = _competitionRepository.GetAllCopetitions().OrderBy(c => c.Name);
+
+        //    var viewModel = new HomeViewModel()
+        //    {
+        //        Title = _userManager.GetUserId(User),
+        //        Competitions = competitions.ToList()
+        //    };
+        //    return View(viewModel);
+        //}
+
         public IActionResult Index()
         {
-            var competitions = _competitionRepository.GetAllCopetitions().OrderBy(c => c.Name);
+            var news = _newsRepository.News.OrderBy(c => c.Date);
 
-            var viewModel = new HomeViewModel()
-            {
-                Title = _userManager.GetUserId(User),
-                Competitions = competitions.ToList()
-            };
-            return View(viewModel);
+            return View(news);
         }
 
         public IActionResult Calendaar()

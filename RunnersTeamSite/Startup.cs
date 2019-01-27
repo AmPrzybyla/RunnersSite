@@ -41,6 +41,8 @@ namespace RunnersTeamSite
     .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddTransient<ICompetitionRepository, CompetitionRepository>();
+            services.AddTransient<INewsRepository, NewsRepository>();
+
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

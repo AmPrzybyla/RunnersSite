@@ -17,5 +17,6 @@ namespace RunnersTeamSite.Models
 
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Start> Starts { get; set; }
+        public DbSet<News> News { get; set; }
     }
 }
